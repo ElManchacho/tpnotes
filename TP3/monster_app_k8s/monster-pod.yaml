@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: monster-pod
+spec:
+  containers:
+  - image: tecpi/monster_icon:0.1
+    name: monster-icon
+    ports:
+    - containerPort: 9090
+      name: http
+      protocol: TCP
+    env:
+    - name: CONTEXT
+      value: "DEV"
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "50Mi"
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 5000
+      initialDelaySeconds: 5
+      timeoutSeconds: 1
+      periodSeconds: 10
+      failureThreshold: 3

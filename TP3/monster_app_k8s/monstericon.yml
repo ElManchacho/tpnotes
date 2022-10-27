@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monstericon
+  labels:
+    app: monsterstack
+spec:
+  template:
+    spec:
+      containers:
+      - name: monstericon
+        image: tecpi/monster_icon:0.1
+        ports:
+        - containerPort: 9090
+    metadata:
+      labels:
+        app: monsterstack
+        partie: monstericon
+  selector:
+    matchLabels:
+      app: monsterstack
+      partie: monstericon
+  strategy:
+    type: Recreate
+  replicas: 3
